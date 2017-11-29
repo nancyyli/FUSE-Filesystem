@@ -17,7 +17,6 @@ const int NUFS_SIZE  = 1024 * 1024;
 
 static super_block* s_block = 0;
 
-
 typedef struct file_data {
     const char* path;
     inode* node;
@@ -45,7 +44,7 @@ storage_init(const char* path)
     s_block->inode_addr = s_block->data_bitmap_addr + s_block->data_bitmap_size;
     s_block->data_num = 30;
     s_block->data_addr = s_block->inode_addr + (2 * sizeof(inode));
-//implement index of root node for s_block
+    //implement index of root node for s_block
 }
 
 static int
