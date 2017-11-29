@@ -20,7 +20,13 @@ int
 nufs_access(const char *path, int mask)
 {
     printf("access(%s, %04o)\n", path, mask);
-    return 0;
+    int result = file_exists(path);
+    if (result = -1) {
+      return -ENOENT;
+    }
+    else {
+      return 0;
+    }
 }
 
 // implementation for: man 2 stat
@@ -44,14 +50,14 @@ int
 nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
              off_t offset, struct fuse_file_info *fi)
 {
+      printf("readdir(%s)\n", path);
     struct stat st;
-
-    printf("readdir(%s)\n", path);
 
     get_stat("/", &st); // TODO: change path to something that isnt root
     // filler is a callback that adds one item to the result
     // it will return non-zero when the buffer is full
     filler(buf, ".", &st, 0);
+    filler(buf, "..", &st, 0);
 
   //  get_stat("/hello.txt", &st);
   //  filler(buf, "hello.txt", &st, 0);
@@ -64,7 +70,8 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 int
 nufs_mknod(const char *path, mode_t mode, dev_t rdev)
 {
-    printf("mknod(%s, %04o)\n", path, mode);
+    printf("mknod(%s, %04o, %04o)\n", path, mode, rdev);
+    make_file(path, mode, rdev);
     return -1;
 }
 
@@ -138,6 +145,7 @@ nufs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
 
     strlcpy(buf, data, len);
     return len;
+    return 2;
 }
 
 // Actually write data

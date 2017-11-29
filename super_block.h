@@ -3,6 +3,7 @@
 
 
 #include <unistd.h>
+#include "inode.h"
 
 typedef struct super_block {
       int inode_bitmap_size;
@@ -10,7 +11,7 @@ typedef struct super_block {
       int data_bitmap_size;
       char* data_bitmap;
       int inode_num;
-      void* inode_addr;
+      inode** inodes;
       int data_num;
       void* data_addr;
       inode* root_node; // the root inode.
