@@ -15,6 +15,7 @@ typedef struct inode {
 	time_t mtime; // last modification time
 	time_t dtime; // deletion time
 	gid_t gid; // group ID of the file
+	dev_t dev; // ID of device containing file
 	nlink_t links_count; // number of hard links pointing to this file
 	int block; // number of blocks allocated to this file
 	int flags; // file or directory? 1 or 0

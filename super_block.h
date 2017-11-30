@@ -11,7 +11,7 @@ typedef struct super_block {
       int data_bitmap_size;
       char* data_bitmap;
       int inode_num;
-      inode** inodes;
+      inode* inodes;
       int data_num;
       void* data_addr;
       inode* root_node; // the root inode.

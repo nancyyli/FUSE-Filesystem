@@ -3,7 +3,7 @@
     Run through the bits until a 0 is found.
     returns -1 if not 0 bit is found.
 */
-int
+/*int
 get_bit_index(char* bits, int size)
 {
     int count = 0;
@@ -29,6 +29,7 @@ get_bit_index(char* bits, int size)
 /*
     sets the indecated bit to a certain value.
 */
+/*
 void
 set_bit(char* bits, int size, int val, int index)
 {
@@ -52,4 +53,4 @@ set_bit(char* bits, int size, int val, int index)
         // unset bit
         temp &= ~(1 << bit_index);
     }
-}
+}*/

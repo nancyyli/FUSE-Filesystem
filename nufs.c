@@ -70,9 +70,14 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 int
 nufs_mknod(const char *path, mode_t mode, dev_t rdev)
 {
-    printf("mknod(%s, %04o, %04o)\n", path, mode, rdev);
-    make_file(path, mode, rdev);
-    return -1;
+    printf("mknod(%s, %04o)\n", path, mode);
+    int rv = make_file(path, mode, rdev);
+    if (rv == -1) {
+        return -ENOENT;
+    }
+    else {
+        return 0;
+    }
 }
 
 // most of the following callbacks implement
