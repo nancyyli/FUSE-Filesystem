@@ -52,12 +52,15 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 {
       printf("readdir(%s)\n", path);
     struct stat st;
+    struct stat root;
 
-    get_stat("/", &st); // TODO: change path to something that isnt root
+    get_stat(path, &st); // TODO: change path to something that isnt root
     // filler is a callback that adds one item to the result
     // it will return non-zero when the buffer is full
+    get_stat("/", &root);
+
     filler(buf, ".", &st, 0);
-    filler(buf, "..", &st, 0);
+    filler(buf, "..", &root, 0);
 
   //  get_stat("/hello.txt", &st);
   //  filler(buf, "hello.txt", &st, 0);
@@ -157,7 +160,8 @@ nufs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
 int
 nufs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi)
 {
-    printf("write(%s, %ld bytes, @%ld)\n", path, size, offset);
+    printf("write(%s, buf: %s, %ld bytes, @%ld)\n", path, buf, size, offset);
+    int rv = write_file(path, buf, size, offset, fi);
     return -1;
 }
 
