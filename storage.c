@@ -23,13 +23,13 @@ const int BLOCK_SIZE = 4096;
 
 static super_block* s_block = 0;
 
-
+//TODO: move this to its own file
 typedef struct dirent {
   //int    pnum;
   const char*  name;
   inode* node;
 } dirent;
-//TODO: move this to its own file
+
 typedef struct directory {
     int     inum; // number of entries in directory
     dirent* ents;
@@ -140,8 +140,11 @@ storage_init(const char* path)
     printf("made r_node\n");
     directory* dir = r_node->blocks[0];
     dir->node = r_node;
-    dir->inum = 0;
-    dir->ents = 0;
+    dir->inum = 1;
+    dir->ents = (void*)dir + sizeof(inode) + sizeof(int);
+    dir->ents->name = ".";
+    dir->ents->node = r_node;
+
     printf("made directory\n");
     set_bit(s_block->inode_bitmap, s_block->inode_bitmap_size, 1, 0);
     printf("Ending init\n");
@@ -181,12 +184,17 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
 
 static dirent*
 get_file_data(const char* path) {
-    slist* path_list = s_split(path,  '/');
+    printf("going into get_file_data\n");
     directory* root = (directory*)s_block->root_node->blocks[0];
+    if (streq(path, "/")) {
+        printf("getting dirent for root\n");
+        return root->ents;
+    }
+    slist* path_list = s_split(path,  '/');
 
     char* current = path_list->data;
     directory* temp = root;
-
+    printf("going into while loop in get_file_data\n");
     while (path_list != NULL) {
         for(int i = 0; i < temp->inum; i++) {
             if(streq(current, (temp->ents + i)->name)) {
@@ -209,6 +217,8 @@ get_file_data(const char* path) {
                 }
             }
         }
+        printf("path_list = path_list->next\n");
+        path_list = path_list->next;
     }
   /*  for (int ii = 0; 1; ++ii) {
         file_data row = file_table[ii];
