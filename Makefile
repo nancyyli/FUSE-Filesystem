@@ -10,7 +10,7 @@ nufs: $(SRCS)
 	gcc $(CFLAGS) -o nufs $(SRCS) $(LDLIBS)
 
 clean: unmount
-	rm -f nufs *.o test.log
+	rm -f nufs *.o test.log data.nufs
 	rmdir mnt || true
 
 mount: nufs
@@ -28,4 +28,3 @@ gdb: nufs
 	gdb --args ./nufs -f mnt data.nufs
 
 .PHONY: clean mount unmount gdb
-
