@@ -19,6 +19,7 @@ typedef struct inode {
 	nlink_t links_count; // number of hard links pointing to this file
 	int block; // number of blocks allocated to this file TODO: change to num_blocks
 	int flags; // file or directory? 1 or 0
+//	struct inode* next;
 	void* blocks[15];
 } inode;
 

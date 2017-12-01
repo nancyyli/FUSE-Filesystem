@@ -184,12 +184,26 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     // (get_bit_index no matter what will return 0 so in this case /one.txt index is 0)
     // The problem with that is that index 0 on the bitmap is suppose to be our root node so
     // it should never be available to use here. (meaning the first file we make should be given index 1)
-    //if (streq(path, "/two.txt")) {
-    //    index = 1;
-    //}
+/*    if (streq(path, "/two.txt")) {
+        index = 2;
+    }
+    if (streq(path, "/one.txt")) {
+        index = 1;
+    }*/
+
     printf("making file: %s with inode_bitmap index: %d\n", path, index);
     set_bit(s_block->inode_bitmap, s_block->inode_bitmap_size, 1, index);
     // TODO: either set_bit doesnt work or get_bit doesn work
+/*    int num_node = 0;
+    inode* node = s_block->inodes;
+    while(num_node < index) {
+        printf("num_node: %d, index: %d\n", num_node, index);
+        node->next = (void*) node + sizeof(inode);
+        node = node->next;
+        num_node += 1;
+    }*/
+    //printf("s_block->inodes pointer: %p\n", (void*) s_block->inodes);
+    //printf("node pointer: %p\n", (void*) node);
     inode* node = s_block->inodes + (index * sizeof(inode));
     node->mode = mode;
     node->uid = getuid();
@@ -213,26 +227,6 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     return 0;
 }
 
-int
-write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-    // TODO: currently writing data into the file isnt implemented yet
-
-    int off = offset % BLOCK_SIZE;
-    int block_num = offset / BLOCK_SIZE;
-
-    dirent* dat = get_file_data(path);
-    if (!dat) {
-        // TODO: print error? make new file? what should happen in this case?
-        return -1;
-    }
-
-    // can the offset be bigger than the number of bytes already in the file?
-
-    
-
-    return 0;
-}
-
 static dirent*
 get_file_data(const char* path) {
     printf("going into get_file_data\n");
@@ -243,8 +237,7 @@ get_file_data(const char* path) {
     }
     slist* path_list = s_split(path,  '/');
 
-    // not necessary
-    while (path_list != NULL) {
+/*    while (path_list != NULL) {
         printf("Printing data in path_list: %s\n", path_list->data);
         if (path_list->next != NULL) {
             path_list = path_list->next;
@@ -252,19 +245,21 @@ get_file_data(const char* path) {
         else {
             break;
         }
-    }
+    }*/
 
+    path_list = path_list->next; // first is empty
     char* current = path_list->data;
+        printf("current_path_list_data: %s\n", path_list->data);
     directory* temp = root;
-    dirent* temp_ent = temp->ents + 1;
+    dirent* temp_ent = temp->ents;
     printf("going into while loop in get_file_data\n");
     while (path_list != NULL) {
-        for(int i = 1; i < temp->inum; i++) {
+        for(int i = 0; i < temp->inum; i++) {
             printf("going into for loop\n");
             printf("temp->inum: %d, i: %d\n", temp->inum, i);
             printf("path_list data: %s temp->ents->name: %s\n", current, temp_ent->name);
             if(streq(current, temp_ent->name)) {
-                dirent* cur_ent = (temp->ents);
+                dirent* cur_ent = temp_ent;
 
                 if(path_list->next == 0) {
                     return cur_ent;
@@ -289,6 +284,20 @@ get_file_data(const char* path) {
     }
 
     printf("%s does not exist\n", path);
+    return 0;
+}
+
+int
+write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+    int off = offset % BLOCK_SIZE;
+    int block_num = offset / BLOCK_SIZE;
+
+    dirent* dat = get_file_data(path);
+    if (!dat) {
+                // TODO: print error? make new file? what should happen in this case?
+        return -1;
+     }
+         // can the offset be bigger than the number of bytes already in the file?
     return 0;
 }
 
@@ -341,7 +350,6 @@ get_data(const char* path)
     if (!dat) {
         return 0;
     }
-
     size_t size = dat->node->size;
     int num_blocks = dat->node->block;
     char* buf = 0; // where do I get the memory for this?
@@ -358,6 +366,4 @@ get_data(const char* path)
     }
 
     return buf;
-    // TODO: read all of the data in the blocks into a const char* and return.
-    //return (char*)dat->node->blocks[0];
 }

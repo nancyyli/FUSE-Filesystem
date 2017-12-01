@@ -1,0 +1,626 @@
+mkdir -p mnt || true
+./nufs -s -f mnt data.nufs
+Store file system data in: data.nufs
+made directory
+Ending init
+access(/, 0004)
+going into get_file_data
+getting dirent for root
+file does existgetattr(/.xdg-volume-info)
+going into get_file_data
+current_path_list_data: .xdg-volume-info
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: .xdg-volume-info temp->ents->name: /
+path_list = path_list->next
+/.xdg-volume-info does not exist
+getattr(/autorun.inf)
+going into get_file_data
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going intMakefile:17: recipe for target 'mount' failed
+make: *** [mount] Segmentation fault (core dumped)
+fusermount -u mnt || true
+mkdir -p mnt || true
+./nufs -s -f mnt data.nufs
+Store file system data in: data.nufs
+made directory
+Ending init
+getattr(/.xdg-volume-info)
+going into get_file_data
+current_path_list_data: .xdg-volume-info
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: .xdg-volume-info temp->ents->name: /
+path_list = path_list->next
+/.xdg-volume-info does not exist
+access(/, 0004)
+going into get_file_data
+getting dirent for root
+file does existgetattr(/autorun.inf)
+going into get_file_data
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/autorun.inf)
+going into get_file_data
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/one.txt)
+going into get_file_data
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+getattr(/two.txt)
+going into get_file_data
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: two.txt temp->ents->name: /
+path_list = path_list->next
+/two.txt does not exist
+getattr(/one.txt)
+going into get_file_data
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+getattr(/one.txt)
+going into get_file_data
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/abc.txt)
+going into get_file_data
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/two.txt)
+going into get_file_data
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: two.txt temp->ents->name: /
+path_list = path_list->next
+/two.txt does not exist
+getattr(/)
+going into get_file_data
+getting dirent for root
+readdir(/)
+going into get_file_data
+getting dirent for root
+going into get_file_data
+getting dirent for root
+getattr(/abc.txt)
+going into get_file_data
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/def.txt)
+going into get_file_data
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/abc.txt)
+going into get_file_data
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/def.txt)
+going into get_file_data
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/abc.txt)
+going into get_file_data
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/abc.txt)
+going into get_file_data
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/)
+going into get_file_data
+getting dirent for root
+getattr(/def.txt)
+going into get_file_data
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/foo)
+going into get_file_data
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+mkdir(/foo)
+getattr(/foo)
+going into get_file_data
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+getattr(/foo)
+going into get_file_data
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+getattr(/def.txt)
+going into get_file_data
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/foo)
+going into get_file_data
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+getattr(/40k.txt)
+going into get_file_data
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: 40k.txt temp->ents->name: /
+path_list = path_list->next
+/40k.txt does not exist
+mknod(/40k.txt, 100664)
+making file: /40k.txt, 100664
+making file: /40k.txt with inode_bitmap index: 2
+root->inum: 2
+getattr(/40k.txt)
+going into get_file_data
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: 40k.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: 40k.txt temp->ents->name: 40k.txt
+open(/40k.txt)
+write(/40k.txt, buf: =This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string Makefile:17: recipe for target 'mount' failed
+make: *** [mount] Segmentation fault (core dumped)
+fusermount -u mnt || true
