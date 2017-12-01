@@ -16,6 +16,7 @@
 
 // implementation for: man 2 access
 // Checks if a file exists.
+// NOTE: maybe done
 int
 nufs_access(const char *path, int mask)
 {
@@ -31,6 +32,7 @@ nufs_access(const char *path, int mask)
 
 // implementation for: man 2 stat
 // gets an object's attributes (type, permissions, size, etc)
+// NOTE: maybe done
 int
 nufs_getattr(const char *path, struct stat *st)
 {

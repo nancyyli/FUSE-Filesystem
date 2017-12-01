@@ -54,24 +54,39 @@ int
 get_bit_index(char* bits, int size)
 {
     int count = 0;
-    char temp = bits[0]; // maybe, might have to look into it.
+    char temp = *(bits);
 
     for (int i = 0; i < size; i++) {
-
+        //printf("CURRENT CHAR: ");
+        //print_char_bin(temp);
         if (count >= 8) {
             count = 0;
-            temp = bits[i + 1];
+            temp = *(bits + (i + 1));
         }
         else {
             if (!(((temp >> count) & 1) ^ 0)) {
                 return count + (i * 8);
             }
             i--;
+            count += 1;
         }
     }
 
     return -1;
 }
+
+/*
+    TODO: delete later
+
+void print_char_bin(char c)
+{
+    for (int i = 7; i >= 0; --i)
+    {
+        putchar( (c & (1 << i)) ? '1' : '0' );
+    }
+    putchar('\n');
+}
+*/
 
 /*
     sets the indecated bit to a certain value.
@@ -89,7 +104,7 @@ set_bit(char* bits, int size, int val, int index)
     int bit_index = index % 8;
     //index = first_part + second_part;
 
-    char temp = bits[char_index];
+    char temp = *(bits + char_index);
 
     if (val) {
         // set bit
@@ -99,6 +114,10 @@ set_bit(char* bits, int size, int val, int index)
         // unset bit
         temp &= ~(1 << bit_index);
     }
+    *(bits + char_index) = temp;
+
+    //printf("CHARACTER AFTER BITMAP SET: ");
+    //print_char_bin(temp);
 }
 
 void
@@ -114,21 +133,21 @@ storage_init(const char* path)
     s_block = mmap(0, NUFS_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     assert(s_block != MAP_FAILED);
 
-    printf("pointer of s_block %p\n", (void*)s_block);
-    s_block->inode_bitmap_size = 2;
+    //printf("pointer of s_block %p\n", (void*)s_block);
+    s_block->inode_bitmap_size = 1;
     s_block->inode_bitmap = (void*)s_block + sizeof(super_block);
-    printf("inode_bitmap: %p\n", (void*) s_block->inode_bitmap);
-    s_block->data_bitmap_size = 30;
+    //printf("inode_bitmap: %p\n", (void*) s_block->inode_bitmap);
+    s_block->data_bitmap_size = 6;
     s_block->data_bitmap = s_block->inode_bitmap + s_block->inode_bitmap_size;
     s_block->inode_num = 3;
     s_block->inodes = (inode*)s_block->data_bitmap + s_block->data_bitmap_size;
     s_block->data_num = 45;
     s_block->data_addr = s_block->inodes + (s_block->inode_num * sizeof(inode));
     s_block->root_node = s_block->inodes;
-    printf("Made s_block\n");
+    //printf("Made s_block\n");
 
     inode* r_node = s_block->root_node;
-    printf("r_node: %p\n", (void*) r_node);
+    //printf("r_node: %p\n", (void*) r_node);
     r_node->mode = 0755;
     r_node->uid = getuid();
     r_node->size = BLOCK_SIZE;
@@ -140,7 +159,8 @@ storage_init(const char* path)
     r_node->block = 1;
     r_node->flags = 0;
     r_node->blocks[0] = s_block->data_addr;
-    printf("made r_node\n");
+
+    //printf("made r_node\n");
     directory* dir = r_node->blocks[0];
     dir->node = r_node;
     dir->inum = 1;
@@ -150,6 +170,7 @@ storage_init(const char* path)
 
     printf("made directory\n");
     set_bit(s_block->inode_bitmap, s_block->inode_bitmap_size, 1, 0);
+    set_bit(s_block->data_bitmap, s_block->data_bitmap_size, 1, 0);
     printf("Ending init\n");
     //    printf("size of inode: %d", sizeof(inode));
     //    printf("size of superblock: %d", sizeof(super_block));
@@ -160,6 +181,7 @@ storage_init(const char* path)
 int
 make_file(const char *path, mode_t mode, dev_t rdev) {
     printf("making file: %s, %04o\n", path, mode);
+    print_char_bin(*(s_block->inode_bitmap));
     int index = get_bit_index(s_block->inode_bitmap, s_block->inode_bitmap_size);
     // TODO: This is just a workaround because set_bit/get_bit doesnt seem to be working properly;
     // Couple things wrong with this:
@@ -170,9 +192,9 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     // (get_bit_index no matter what will return 0 so in this case /one.txt index is 0)
     // The problem with that is that index 0 on the bitmap is suppose to be our root node so
     // it should never be available to use here. (meaning the first file we make should be given index 1)
-    if (streq(path, "/two.txt")) {
-        index = 1;
-    }
+    //if (streq(path, "/two.txt")) {
+    //    index = 1;
+    //}
     printf("making file: %s with inode_bitmap index: %d\n", path, index);
     set_bit(s_block->inode_bitmap, s_block->inode_bitmap_size, 1, index);
     // TODO: either set_bit doesnt work or get_bit doesn work
@@ -204,6 +226,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
     // TODO: currently writing data into the file isnt implemented yet
     return 0;
 }
+
 static dirent*
 get_file_data(const char* path) {
     printf("going into get_file_data\n");
@@ -214,10 +237,11 @@ get_file_data(const char* path) {
     }
     slist* path_list = s_split(path,  '/');
 
+    // not necessary
     while (path_list != NULL) {
         printf("Printing data in path_list: %s\n", path_list->data);
         if (path_list->next != NULL) {
-                    path_list = path_list->next;
+            path_list = path_list->next;
         }
         else {
             break;
