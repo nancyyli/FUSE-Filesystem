@@ -17,7 +17,7 @@ typedef struct inode {
 	gid_t gid; // group ID of the file
 	dev_t dev; // ID of device containing file
 	nlink_t links_count; // number of hard links pointing to this file
-	int block; // number of blocks allocated to this file
+	int block; // number of blocks allocated to this file TODO: change to num_blocks
 	int flags; // file or directory? 1 or 0
 	void* blocks[15];
 } inode;

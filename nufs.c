@@ -155,7 +155,7 @@ nufs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
 
     strlcpy(buf, data, len);
     return len;
-    return 2;
+    return 2; // ?? unreachable code.
 }
 
 // Actually write data

@@ -1,5 +1,3 @@
-#include <string.h>
-
 #include <sys/mman.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -8,6 +6,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 
 #define FUSE_USE_VERSION 26
@@ -19,8 +18,6 @@
 #include "slist.h"
 #include "util.h"
 
-//#include "directory.h"
-
 const int NUFS_SIZE  = 1024 * 1024;
 const int BLOCK_SIZE = 4096;
 
@@ -28,23 +25,15 @@ static super_block* s_block = 0;
 
 //TODO: move this to its own file
 typedef struct dirent {
-  //int    pnum;
-  const char*  name;
-  inode* node;
+    const char*  name; // name of directory entry
+    inode* node; // node of directory entry
 } dirent;
 
 typedef struct directory {
     int     inum; // number of entries in directory
-    dirent* ents;
-    inode*  node;
+    dirent* ents; // a list of entries
+    inode*  node; // the node of this directory
 } directory;
-/*
-typedef struct file_data {
-    const char* path;
-    inode* node;
-} file_data;
-*/
-//static file_data file_table[30]; // change when the number of data blocks is calculated.
 
 /*
     Run through the bits until a 0 is found.
@@ -177,11 +166,14 @@ storage_init(const char* path)
     //implement index of root node for s_block
 }
 
-//TODO: if file name already exists
+// TODO: if file name already exists
+// the comment above can most likely be ignored.
+// fuse checks if a file exists with one of our methods.
+// so this is only called when we know the file does not exist.
 int
 make_file(const char *path, mode_t mode, dev_t rdev) {
     printf("making file: %s, %04o\n", path, mode);
-    print_char_bin(*(s_block->inode_bitmap));
+    //print_char_bin(*(s_block->inode_bitmap));
     int index = get_bit_index(s_block->inode_bitmap, s_block->inode_bitmap_size);
     // TODO: This is just a workaround because set_bit/get_bit doesnt seem to be working properly;
     // Couple things wrong with this:
@@ -211,12 +203,12 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     node->flags = 1; //TODO
 
     directory* root = (directory*)s_block->root_node->blocks[0];
-    printf("root->inum: %d\n", root->inum);
     dirent* new_ent = root->ents + root->inum;
     new_ent->node = node;
     slist* path_name = s_split(path, '/');
     new_ent->name = path_name->next->data;
     root->inum += 1;
+    printf("root->inum: %d\n", root->inum);
 
     return 0;
 }
@@ -224,6 +216,20 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
 int
 write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     // TODO: currently writing data into the file isnt implemented yet
+
+    int off = offset % BLOCK_SIZE;
+    int block_num = offset / BLOCK_SIZE;
+
+    dirent* dat = get_file_data(path);
+    if (!dat) {
+        // TODO: print error? make new file? what should happen in this case?
+        return -1;
+    }
+
+    // can the offset be bigger than the number of bytes already in the file?
+
+    
+
     return 0;
 }
 
@@ -281,18 +287,7 @@ get_file_data(const char* path) {
         printf("path_list = path_list->next\n");
         path_list = path_list->next;
     }
-  /*  for (int ii = 0; 1; ++ii) {
-        file_data row = file_table[ii];
 
-        if (file_table[ii].path == 0) {
-            break;
-        }
-
-        if (streq(path, file_table[ii].path)) {
-            return &(file_table[ii]);
-        }
-    }
-*/
     printf("%s does not exist\n", path);
     return 0;
 }
@@ -347,6 +342,22 @@ get_data(const char* path)
         return 0;
     }
 
+    size_t size = dat->node->size;
+    int num_blocks = dat->node->block;
+    char* buf = 0; // where do I get the memory for this?
+    // the problem at the moment is that i cannot return this thing, since it
+    // is a local var. So i either need to malloc some memory for it, or
+    // i have to use some of the one i already have.
+
+    // copy all bytes from all blocks.
+    for(int i = 0; i < num_blocks; i++) {
+        char* temp = (char*)dat->node->blocks[i];
+        for(int j = 0; i < BLOCK_SIZE; j++) {
+            *(buf + j + (i * BLOCK_SIZE)) = *(temp + j);
+        }
+    }
+
+    return buf;
     // TODO: read all of the data in the blocks into a const char* and return.
-    return (char*)dat->node->blocks[0];
+    //return (char*)dat->node->blocks[0];
 }
