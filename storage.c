@@ -147,7 +147,7 @@ storage_init(const char* path)
         directory* dir = (directory*)get_pointer(*(temp_pointer));
         dir->node_off = s_block->root_node_off;
         dir->inum = 1;
-        dir->ents_off = s_block->data_blocks_off + (sizeof(int) * 3); //((void*)dir) + sizeof(directory); //s_block->data_blocks_off + (sizeof(int) * 2);
+        dir->ents_off = s_block->data_blocks_off + sizeof(directory); //((void*)dir) + sizeof(directory); //s_block->data_blocks_off + (sizeof(int) * 2);
         dir_ent* root_dirent = (dir_ent*)get_pointer(dir->ents_off);
         root_dirent->name_off = dir->ents_off + sizeof(dir_ent);
         char* name = (char*)get_pointer(root_dirent->name_off);
@@ -205,6 +205,7 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     dir_ent* new_ent = (dir_ent*)(get_pointer(root->ents_off) + (root->inum * (48 + sizeof(dir_ent))));
     new_ent->node_off = s_block->inodes_off + (index * INODE_SIZE);
     printf("new_ent->node_off: %d\n", new_ent->node_off);
+    new_ent->name_off = root->ents_off + ((root->inum + 1) * (48 + sizeof(dir_ent)));
     slist* path_name = s_split(path, '/');
     char* name = (char*)get_pointer(new_ent->name_off);
     strcpy(name, path_name->next->data);
