@@ -24,6 +24,7 @@ const int NUFS_SIZE  = 1024 * 1024;
 const int BLOCK_SIZE = 4096;
 const int INODE_SIZE =  sizeof(inode) + (sizeof(int) * 15); // NOT TOO SURE ABOUT THIS
 
+static int counter = 0;
 static super_block* s_block = 0;
 
 /*
@@ -44,6 +45,7 @@ get_bit_index(char* bits, int size)
         }
         else {
             if (!(((temp >> count) & 1) ^ 0)) {
+                printf("get_bit_index: %d\n", count + (i * 8));
                 return count + (i * 8);
             }
             i--;
@@ -111,48 +113,55 @@ storage_init(const char* path)
 
     s_block = mmap(0, NUFS_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     assert(s_block != MAP_FAILED);
+    if(s_block->inode_bitmap_size != 4) {
+        //printf("pointer of s_block %p\n", (void*)s_block);
+        s_block->inode_bitmap_size = 4; // TODO: pick better than just 4 chars
+        s_block->inode_bitmap_off =  sizeof(super_block); // set offset of the bitmap #(void*)s_block + sizeof(super_block);
+        //printf("inode_bitmap: %p\n", (void*) s_block->inode_bitmap);
+        s_block->data_bitmap_size = 6;
+        s_block->data_bitmap_off = s_block->inode_bitmap_off + s_block->inode_bitmap_size;
+        s_block->inode_num = 10; // TODO: pick better number than just 10 inodes
+        s_block->inodes_off = s_block->data_bitmap_off + s_block->data_bitmap_size;
+        s_block->data_num = 45;
+        s_block->data_blocks_off = s_block->inodes_off + (s_block->inode_num * INODE_SIZE);
+        s_block->root_node_off = s_block->inodes_off;
+        //printf("Made s_block\n");
 
-    //printf("pointer of s_block %p\n", (void*)s_block);
-    s_block->inode_bitmap_size = 4; // TODO: pick better than just 4 chars
-    s_block->inode_bitmap_off =  sizeof(super_block); // set offset of the bitmap #(void*)s_block + sizeof(super_block);
-    //printf("inode_bitmap: %p\n", (void*) s_block->inode_bitmap);
-    s_block->data_bitmap_size = 6;
-    s_block->data_bitmap_off = s_block->inode_bitmap_off + s_block->inode_bitmap_size;
-    s_block->inode_num = 10; // TODO: pick better number than just 10 inodes
-    s_block->inodes_off = s_block->data_bitmap_off + s_block->data_bitmap_size;
-    s_block->data_num = 45;
-    s_block->data_blocks_off = s_block->inodes_off + (s_block->inode_num * INODE_SIZE);
-    s_block->root_node_off = s_block->inodes_off;
-    //printf("Made s_block\n");
+        inode* r_node = (inode*)get_pointer(s_block->root_node_off);
+        //printf("r_node: %p\n", (void*) r_node);
+        r_node->mode = 0755;
+        r_node->uid = getuid();
+        r_node->size = BLOCK_SIZE;
+        r_node->atime = time(NULL);
+        r_node->ctime = time(NULL);
+        r_node->mtime = time(NULL);
+        r_node->gid = getgid();
+        r_node->links_count = 0;
+        r_node->num_blocks = 1;
+        r_node->flags = 0;
+        r_node->blocks_off = s_block->root_node_off + sizeof(inode);
+        int* temp_pointer = (int*)get_pointer(r_node->blocks_off);
+        *(temp_pointer) = s_block->data_blocks_off;
 
-    inode* r_node = (inode*)get_pointer(s_block->root_node_off);
-    //printf("r_node: %p\n", (void*) r_node);
-    r_node->mode = 0755;
-    r_node->uid = getuid();
-    r_node->size = BLOCK_SIZE;
-    r_node->atime = time(NULL);
-    r_node->ctime = time(NULL);
-    r_node->mtime = time(NULL);
-    r_node->gid = getgid();
-    r_node->links_count = 0;
-    r_node->num_blocks = 1;
-    r_node->flags = 0;
-    r_node->blocks_off = s_block->root_node_off + sizeof(inode);
-    int* temp_pointer = (int*)get_pointer(r_node->blocks_off);
-    *(temp_pointer) = s_block->data_blocks_off;
+        //printf("made r_node\n");
+        directory* dir = (directory*)get_pointer(*(temp_pointer));
+        dir->node_off = s_block->root_node_off;
+        dir->inum = 1;
+        dir->ents_off = s_block->data_blocks_off + (sizeof(int) * 3); //((void*)dir) + sizeof(directory); //s_block->data_blocks_off + (sizeof(int) * 2);
+        dir_ent* root_dirent = (dir_ent*)get_pointer(dir->ents_off);
+        root_dirent->name_off = dir->ents_off + sizeof(dir_ent);
+        char* name = (char*)get_pointer(root_dirent->name_off);
+        strcpy(name, "/");
+        root_dirent->node_off = s_block->root_node_off;
 
-    //printf("made r_node\n");
-    directory* dir = (directory*)get_pointer(*(temp_pointer));
-    dir->node_off = s_block->root_node_off;
-    dir->inum = 1;
-    dir->ents = (void*)dir + INODE_SIZE + sizeof(int);
-    dir->ents->name = "/";
-    dir->ents->node_off = s_block->root_node_off;
+        printf("made directory\n");
+        set_bit((char*)get_pointer(s_block->inode_bitmap_off), s_block->inode_bitmap_size, 1, 0);
+        set_bit((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size, 1, 0);
+        printf("Ending init\n");
+    //    counter += 1;
+    //    printf("counter: %d\n", counter);
+    }
 
-    printf("made directory\n");
-    set_bit((char*)get_pointer(s_block->inode_bitmap_off), s_block->inode_bitmap_size, 1, 0);
-    set_bit((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size, 1, 0);
-    printf("Ending init\n");
     //    printf("size of inode: %d", sizeof(inode));
     //    printf("size of superblock: %d", sizeof(super_block));
     //implement index of root node for s_block
@@ -193,11 +202,12 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
 
     directory* root = (directory*)get_pointer(*(temp_pointer));
-    dir_ent* new_ent = root->ents + root->inum;
+    dir_ent* new_ent = (dir_ent*)(get_pointer(root->ents_off) + (root->inum * (48 + sizeof(dir_ent))));
     new_ent->node_off = s_block->inodes_off + (index * INODE_SIZE);
     printf("new_ent->node_off: %d\n", new_ent->node_off);
     slist* path_name = s_split(path, '/');
-    new_ent->name = path_name->next->data;
+    char* name = (char*)get_pointer(new_ent->name_off);
+    strcpy(name, path_name->next->data);
     root->inum += 1;
 //    printf("root->inum: %d\n", root->inum);
 
@@ -210,9 +220,9 @@ get_file_data(const char* path) {
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
     directory* root = (directory*)get_pointer(*(temp_pointer));
     if (streq(path, "/")) {
-        printf("getting dirent for root: %s\n", root->ents->name);
+        printf("getting dirent for root: %s\n", (char*)get_pointer(((dir_ent*)get_pointer(root->ents_off))->name_off));
 
-        return root->ents;
+        return (dir_ent*)get_pointer(root->ents_off);
     }
     slist* path_list = s_split(path,  '/');
     /*
@@ -230,14 +240,14 @@ get_file_data(const char* path) {
     char* current = path_list->data;
     printf("current_path_list_data: %s\n", path_list->data);
     directory* temp = root;
-    dir_ent* temp_ent = temp->ents;
+    dir_ent* temp_ent = (dir_ent*)get_pointer(temp->ents_off);
     printf("going into while loop in get_file_data\n");
     while (path_list != NULL) {
         for(int i = 0; i < temp->inum; i++) {
             printf("going into for loop\n");
             printf("temp->inum: %d, i: %d\n", temp->inum, i);
-            printf("path_list data: %s temp->ents->name: %s\n", current, temp_ent->name);
-            if(streq(current, temp_ent->name)) {
+            printf("path_list data: %s temp->ents->name: %s\n", current, (char*)get_pointer(temp_ent->name_off));
+            if(streq(current, (char*)get_pointer(temp_ent->name_off))) {
                 dir_ent* cur_ent = temp_ent;
 
                 if(path_list->next == 0) {
@@ -251,7 +261,7 @@ get_file_data(const char* path) {
                         path_list = path_list->next;
                         temp_pointer = (int*)get_pointer(cur_node->blocks_off);
                         temp = (directory*)get_pointer(*(temp_pointer));
-                        temp_ent = temp->ents;
+                        temp_ent = (dir_ent*)get_pointer(temp->ents_off);
                         i = 0;
                         break;
                     }
@@ -262,7 +272,7 @@ get_file_data(const char* path) {
                     }
                 }
             }
-            temp_ent = temp_ent + 1; // should only be plus 1 to move to the next dirent.
+            temp_ent = (dir_ent*)((void*)(temp_ent) + sizeof(dir_ent) + 48); // should only be plus 1 to move to the next dirent.
         }
         printf("path_list = path_list->next\n");
         path_list = path_list->next;
@@ -322,7 +332,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         *(file_data + off) = *(buf + i);
     }
     printf("AFTER WRITTING\n");
-    
+
     node->size = node->size - offset + size;
     node->mtime = time(NULL);
 */
