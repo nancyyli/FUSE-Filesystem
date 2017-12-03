@@ -57,18 +57,21 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 {
     // loop through all of the entries of the of the given directory,
     // and filler them into the buf.
-/*    printf("readdir(%s)\n", path);
+    /*printf("readdir(%s)\n", path);
     struct stat st;
     get_stat(path, &st);
     filler(buf, path, &st, 0);
 
-    directory* get_root_directory();
-    dir_ent* cur_ent = get_file_data(path);
-    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(cur_ent->node_off))->blocks_off);
-    directory* dir = (directory*)get_pointer(*(temp_pointer));
-
+    struct stat root;
+    get_stat("/", &root);
+    filler(buf, "mnt", &root, 0);
+    directory* dir = get_root_directory();
+//    dir_ent* cur_ent = get_file_data(path);
+//    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(cur_ent->node_off))->blocks_off);
+//    directory* dir = (directory*)get_pointer(*(temp_pointer));
+    dir_ent* cur_ent = dir->ents + 1;
     // add all of the entris in path to the buf
-    for (int i = 0; i < dir->inum; i++) {
+/*    for (int i = 0; i < dir->inum; i++) {
         cur_ent = cur_ent + 1;
         struct stat temp;
 
@@ -147,7 +150,7 @@ int
 nufs_truncate(const char *path, off_t size)
 {
     printf("truncate(%s, %ld bytes)\n", path, size);
-    return -1;
+    return 0;
 }
 
 // this is called on open, but doesn't need to do much
@@ -174,7 +177,6 @@ nufs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_fi
 
     strlcpy(buf, data, len);
     return len;
-    return 2; // ?? unreachable code.
 }
 
 // Actually write data
@@ -183,7 +185,13 @@ nufs_write(const char *path, const char *buf, size_t size, off_t offset, struct 
 {
     printf("write(%s, buf: %s, %ld bytes, @%ld)\n", path, buf, size, offset);
     int rv = write_file(path, buf, size, offset, fi);
-    return -1;
+    if(!rv) {
+        printf("rv = -1\n");
+        return (int)size;
+    }
+    else {
+        return (int)size;
+    }
 }
 
 // Update the timestamps on a file or directory.
