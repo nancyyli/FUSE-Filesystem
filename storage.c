@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
@@ -17,24 +18,13 @@
 #include "inode.h"
 #include "slist.h"
 #include "util.h"
+#include "directory.h"
 
 const int NUFS_SIZE  = 1024 * 1024;
 const int BLOCK_SIZE = 4096;
 const int INODE_SIZE =  sizeof(inode) + (sizeof(int*) * 15); // NOT TOO SURE ABOUT THIS
 
 static super_block* s_block = 0;
-
-//TODO: move this to its own file
-typedef struct dirent {
-    const char*  name; // name of directory entry
-    int node_off;      // node offset of directory entry
-} dirent;
-
-typedef struct directory {
-    int     inum;  // number of entries in directory
-    int  node_off; // the node offset of this directory
-    dirent* ents;  // a list of entries
-} directory;
 
 /*
     Run through the bits until a 0 is found.
@@ -148,10 +138,11 @@ storage_init(const char* path)
     r_node->num_blocks = 1;
     r_node->flags = 0;
     r_node->blocks_off = s_block->root_node_off + sizeof(inode);
-    *((int*)get_pointer(r_node->blocks_off)) = s_block->data_blocks_off;
+    int* temp_pointer = (int*)get_pointer(r_node->blocks_off);
+    *(temp_pointer) = s_block->data_blocks_off;
 
     //printf("made r_node\n");
-    directory* dir = (directory*)get_pointer(*((int*)get_pointer(r_node->blocks_off)));
+    directory* dir = (directory*)get_pointer(*(temp_pointer));
     dir->node_off = s_block->root_node_off;
     dir->inum = 1;
     dir->ents = (void*)dir + INODE_SIZE + sizeof(int);
@@ -203,8 +194,10 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     node->num_blocks = 0;
     node->flags = 1; // TODO
 
-    directory* root = (directory*)get_pointer(*((int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off)));
-    dirent* new_ent = root->ents + root->inum;
+    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
+
+    directory* root = (directory*)get_pointer(*(temp_pointer));
+    dir_ent* new_ent = root->ents + root->inum;
     new_ent->node_off = s_block->inodes_off + (index * INODE_SIZE);
     slist* path_name = s_split(path, '/');
     new_ent->name = path_name->next->data;
@@ -214,10 +207,11 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     return 0;
 }
 
-static dirent*
+static dir_ent*
 get_file_data(const char* path) {
     printf("going into get_file_data\n");
-    directory* root = (directory*)get_pointer(*((int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off)));
+    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
+    directory* root = (directory*)get_pointer(*(temp_pointer));
     if (streq(path, "/")) {
         printf("getting dirent for root\n");
         return root->ents;
@@ -238,7 +232,7 @@ get_file_data(const char* path) {
     char* current = path_list->data;
     printf("current_path_list_data: %s\n", path_list->data);
     directory* temp = root;
-    dirent* temp_ent = temp->ents;
+    dir_ent* temp_ent = temp->ents;
     printf("going into while loop in get_file_data\n");
     while (path_list != NULL) {
         for(int i = 0; i < temp->inum; i++) {
@@ -246,7 +240,7 @@ get_file_data(const char* path) {
             printf("temp->inum: %d, i: %d\n", temp->inum, i);
             printf("path_list data: %s temp->ents->name: %s\n", current, temp_ent->name);
             if(streq(current, temp_ent->name)) {
-                dirent* cur_ent = temp_ent;
+                dir_ent* cur_ent = temp_ent;
 
                 if(path_list->next == 0) {
                     return cur_ent;
@@ -257,7 +251,11 @@ get_file_data(const char* path) {
                     // check if the dirent is a file or directory.
                     if(cur_node->flags == 0) {
                         path_list = path_list->next;
-                        temp = (directory*)get_pointer(*((int*)get_pointer(cur_node->blocks_off)));
+                        temp_pointer = (int*)get_pointer(cur_node->blocks_off);
+                        temp = (directory*)get_pointer(*(temp_pointer));
+                        temp_ent = temp->ents;
+                        i = 0;
+                        break;
                     }
                     else {
                         // maybe change for an error
@@ -266,7 +264,7 @@ get_file_data(const char* path) {
                     }
                 }
             }
-            temp_ent = temp->ents + 1; // should only be plus 1 to move to the next dirent.
+            temp_ent = temp_ent + 1; // should only be plus 1 to move to the next dirent.
         }
         printf("path_list = path_list->next\n");
         path_list = path_list->next;
@@ -281,13 +279,14 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
     int off = offset % BLOCK_SIZE;
     int block_num = offset / BLOCK_SIZE;
 
-    dirent* dat = get_file_data(path);
+    dir_ent* dat = get_file_data(path);
     if (!dat) {
         // TODO: print error? make new file? what should happen in this case?
         return -1;
     }
 
     inode* node = (inode*)get_pointer(dat->node_off);
+    int* temp_pointer = 0;
 
     // add mem blocks to the node if necessary
     if((offset + size)/BLOCK_SIZE > node->num_blocks) {
@@ -297,13 +296,15 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
             set_bit((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size, 1, index);
 
             // set the block offeset in the node
-            *(((int*)get_pointer(node->blocks_off))[node->num_blocks]) = (index * BLOCK_SIZE) + s_block->data_blocks_off;
+            temp_pointer = ((int*)get_pointer(node->blocks_off))[node->num_blocks];
+            *(temp_pointer) = (index * BLOCK_SIZE) + s_block->data_blocks_off;
             node->num_blocks += 1;
         }
     }
 
     // get the data from the block we are writting to
-    char* file_data = get_pointer(*(((int*)get_pointer(node->blocks_off))[block_num]));
+    temp_pointer = ((int*)get_pointer(node->blocks_off))[block_num];
+    char* file_data = get_pointer(*(temp_pointer));
 
     // write the data
     for (int i = 0; i < size; i++) {
@@ -311,7 +312,8 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         if ((offset + i) % BLOCK_SIZE == 0) {
             block_num += 1;
             off = 0;
-            file_data = get_pointer(*(((int*)get_pointer(node->blocks_off))[block_num]));
+            temp_pointer = ((int*)get_pointer(node->blocks_off))[block_num];
+            file_data = get_pointer(*(temp_pointer));
         }
 
         // writting a byte at a time. might not work.
@@ -323,7 +325,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
 
 int
 file_exists(const char* path) {
-    dirent* dat = get_file_data(path);
+    dir_ent* dat = get_file_data(path);
     printf("file does exist");
     if (!dat) {
       return -1;
@@ -336,7 +338,7 @@ file_exists(const char* path) {
 int
 get_stat(const char* path, struct stat* st)
 {
-    dirent* dat = get_file_data(path);
+    dir_ent* dat = get_file_data(path);
     if (!dat) {
         return -1;
     }
@@ -368,7 +370,7 @@ get_stat(const char* path, struct stat* st)
 const char*
 get_data(const char* path)
 {
-    dirent* dat = get_file_data(path);
+    dir_ent* dat = get_file_data(path);
     if (!dat) {
         return 0;
     }
@@ -377,10 +379,12 @@ get_data(const char* path)
     size_t size = node->size;
     int num_blocks = node->num_blocks;
     char* buf = malloc(num_blocks * BLOCK_SIZE); // maybe change it so that it is the number of bytes in the file.
+    int* temp_pointer = 0;
 
     // copy all bytes from all blocks.
     for(int i = 0; i < num_blocks; i++) {
-        char* temp = (char*)get_pointer(*(((int*)get_pointer(node->blocks_off))[i]));
+        temp_pointer = ((int*)get_pointer(node->blocks_off))[i];
+        char* temp = (char*)get_pointer(*(temp_pointer));
         for(int j = 0; i < BLOCK_SIZE; j++) {
             *(buf + j + (i * BLOCK_SIZE)) = *(temp + j);
         }

@@ -7,12 +7,15 @@
 #include <dirent.h>
 #include <bsd/string.h>
 #include <assert.h>
+#include <stdlib.h>
+
 
 #define FUSE_USE_VERSION 26
 #include <fuse.h>
 
 #include "storage.h"
-
+#include "inode.h"
+#include "directory.h"
 
 // implementation for: man 2 access
 // Checks if a file exists.
@@ -56,22 +59,32 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
     // and filler them into the buf.
     printf("readdir(%s)\n", path);
     struct stat st;
-    struct stat root;
+    get_stat(path, &st);
+    filler(buf, ".", &st, 0);
 
-    //dirent* dir = get_file_data(path);
+    dir_ent* cur_ent = get_file_data(path);
+    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(cur_ent->node_off))->blocks_off);
+    directory* dir = (directory*)get_pointer(*(temp_pointer));
 
+    // add all of the entris in path to the buf
+    for (int i = 0; i < dir->inum; i++) {
+        cur_ent = cur_ent + 1;
+        struct stat temp;
 
-    get_stat(path, &st); // TODO: change path to something that isnt root
+        char* full_path = malloc(256); // used to combine two char*
+        strcpy(full_path, path);
+        strcat(full_path, cur_ent->name);
+
+        get_stat(full_path, &temp);
+        filler(buf, full_path, &temp, 0);
+        free(full_path);
+    }
+
+    // TODO: change path to something that isnt root
     // filler is a callback that adds one item to the result
     // it will return non-zero when the buffer is full
-    get_stat("/", &root);
-
-    filler(buf, ".", &st, 0);
-    filler(buf, "..", &root, 0);
-
-  //  get_stat("/hello.txt", &st);
-  //  filler(buf, "hello.txt", &st, 0);
-
+    // NOTE: i dont know what this means.???
+    //filler(buf, "..", &root, 0);
     return 0;
 }
 
