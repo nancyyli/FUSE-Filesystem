@@ -206,7 +206,7 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
 
 dir_ent*
 get_file_data(const char* path) {
-    printf("going into get_file_data\n");
+    printf("going into get_file_datafor path: %s\n", path);
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
     directory* root = (directory*)get_pointer(*(temp_pointer));
     if (streq(path, "/")) {
@@ -274,7 +274,7 @@ get_file_data(const char* path) {
 
 int
 write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-    int off = offset % BLOCK_SIZE;
+/*    int off = offset % BLOCK_SIZE;
     int block_num = offset / BLOCK_SIZE;
 
     printf("IN WRITE\n");
@@ -289,7 +289,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
 
     // add mem blocks to the node if necessary
     if((offset + size)/BLOCK_SIZE >= node->num_blocks) {
-        for(int i = 0; i < 1/*((offset + size)/BLOCK_SIZE) - node->num_blocks*/; i++) {
+        for(int i = 0; i < 1/*((offset + size)/BLOCK_SIZE) - node->num_blocks*//*; i++) {
             // get index from bitmap
             int index = get_bit_index((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size);
             set_bit((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size, 1, index);
@@ -322,7 +322,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         *(file_data + off) = *(buf + i);
     }
     printf("AFTER WRITTING\n");
-
+*/
     return 0;
 }
 
@@ -340,7 +340,12 @@ file_exists(const char* path) {
 
 directory*
 get_root_directory() {
-    return (directory*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
+
+    inode* r_inode = (inode*)get_pointer(s_block->root_node_off);
+    directory* dir = (directory*)get_pointer(s_block->data_blocks_off);
+     //(directory*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
+    //printf("made r_node\n");
+    return dir;
 }
 
 int
@@ -354,8 +359,8 @@ get_stat(const char* path, struct stat* st)
     inode* cur_node = (inode*)get_pointer(dat->node_off);
     printf("root_node: %d, cur_node: %d\n", s_block->root_node_off, dat->node_off);
 
-    printf("get_stat for: %d\n" , cur_node->mode);
-    printf("flag for: %d\n", cur_node->flags);
+    //printf("get_stat for: %d\n" , cur_node->mode);
+    //printf("flag for: %d\n", cur_node->flags);
     memset(st, 0, sizeof(struct stat));
     st->st_uid  = getuid();
     st->st_gid = getgid();

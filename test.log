@@ -1,0 +1,1066 @@
+gcc -g `pkg-config fuse --cflags` -o nufs slist.c storage.c bit_map.c nufs.c `pkg-config fuse --libs` -lbsd
+mkdir -p mnt || true
+./nufs -s -f mnt data.nufs
+Store file system data in: data.nufs
+made directory
+Ending init
+access(/, 0004)
+going into get_file_datafor path: /
+getting dirent for root: /
+file does existgetattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/.xdg-volume-info)
+going into get_file_datafor path: /.xdg-volume-info
+current_path_list_data: .xdg-volume-info
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: .xdg-volume-info temp->ents->name: /
+path_list = path_list->next
+/.xdg-volume-info does not exist
+getattr(/autorun.inf)
+going into get_file_datafor path: /autorun.inf
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/autorun.inf)
+going into get_file_datafor path: /autorun.inf
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+getattr(/one.txt)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+mknod(/one.txt, 100664)
+making file: /one.txt, 100664
+making file: /one.txt with inode_bitmap index: 1
+new_ent->node_off: 194
+getattr(/one.txt)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: one.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: one.txt temp->ents->name: one.txt
+root_node: 46, cur_node: 194
+open(/one.txt)
+write(/one.txt, buf: hello, one
+, 11 bytes, @0)
+rv = -1
+getattr(/one.txt)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: one.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: one.txt temp->ents->name: one.txt
+root_node: 46, cur_node: 194
+open(/one.txt)
+read(/one.txt, 4096 bytes, @0)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: one.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: one.txt temp->ents->name: one.txt
+BEGINNIGN
+MIDDLE
+END
+READ BUF 
+getattr(/two.txt)
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: two.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: two.txt temp->ents->name: one.txt
+path_list = path_list->next
+/two.txt does not exist
+mknod(/two.txt, 100664)
+making file: /two.txt, 100664
+making file: /two.txt with inode_bitmap index: 2
+new_ent->node_off: 342
+getattr(/two.txt)
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 3, i: 0
+path_list data: two.txt temp->ents->name: /
+going into for loop
+temp->inum: 3, i: 1
+path_list data: two.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 3, i: 2
+path_list data: two.txt temp->ents->name: two.txt
+root_node: 46, cur_node: 342
+open(/two.txt)
+write(/two.txt, buf: hello, two
+, 11 bytes, @0)
+rv = -1
+getattr(/two.txt)
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 3, i: 0
+path_list data: two.txt temp->ents->name: /
+going into for loop
+temp->inum: 3, i: 1
+path_list data: two.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 3, i: 2
+path_list data: two.txt temp->ents->name: two.txt
+root_node: 46, cur_node: 342
+open(/two.txt)
+read(/two.txt, 4096 bytes, @0)
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 3, i: 0
+path_list data: two.txt temp->ents->name: /
+going into for loop
+temp->inum: 3, i: 1
+path_list data: two.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 3, i: 2
+path_list data: two.txt temp->ents->name: two.txt
+BEGINNIGN
+MIDDLE
+END
+READ BUF xŒªi
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 3
+starting dir_ent: one.txt
+cur_ent: one.txt
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 3, i: 0
+path_list data: one.txt temp->ents->name: /
+going into for loop
+temp->inum: 3, i: 1
+path_list data: one.txt temp->ents->name: one.txt
+root_node: 46, cur_node: 194
+cur_ent: two.txt
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 3, i: 0
+path_list data: two.txt temp->ents->name: /
+going into for loop
+temp->inum: 3, i: 1
+path_list data: two.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 3, i: 2
+path_list data: two.txt temp->ents->name: two.txt
+root_node: 46, cur_node: 342
+getattr(/2k.txt)
+going into get_file_datafor path: /2k.txt
+current_path_list_data: 2k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 3, i: 0
+path_list data: 2k.txt temp->ents->name: /
+going into for loop
+temp->inum: 3, i: 1
+path_list data: 2k.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 3, i: 2
+path_list data: 2k.txt temp->ents->name: two.txt
+path_list = path_list->next
+/2k.txt does not exist
+mknod(/2k.txt, 100664)
+making file: /2k.txt, 100664
+making file: /2k.txt with inode_bitmap index: 3
+new_ent->node_off: 490
+getattr(/2k.txt)
+going into get_file_datafor path: /2k.txt
+current_path_list_data: 2k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 4, i: 0
+path_list data: 2k.txt temp->ents->name: /
+going into for loop
+temp->inum: 4, i: 1
+path_list data: 2k.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 4, i: 2
+path_list data: 2k.txt temp->ents->name: two.txt
+going into for loop
+temp->inum: 4, i: 3
+path_list data: 2k.txt temp->ents->name: 2k.txt
+root_node: 46, cur_node: 490
+open(/2k.txt)
+write(/2k.txt, buf: =This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourfusermount -u mnt || true
+ty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.=
+, 2001 bytes, @0)
+rv = -1
+open(/2k.txt)
+getattr(/2k.txt)
+going into get_file_datafor path: /2k.txt
+current_path_list_data: 2k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 4, i: 0
+path_list data: 2k.txt temp->ents->name: /
+going into for loop
+temp->inum: 4, i: 1
+path_list data: 2k.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 4, i: 2
+path_list data: 2k.txt temp->ents->name: two.txt
+going into for loop
+temp->inum: 4, i: 3
+path_list data: 2k.txt temp->ents->name: 2k.txt
+root_node: 46, cur_node: 490
+read(/2k.txt, 4096 bytes, @0)
+going into get_file_datafor path: /2k.txt
+current_path_list_data: 2k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 4, i: 0
+path_list data: 2k.txt temp->ents->name: /
+going into for loop
+temp->inum: 4, i: 1
+path_list data: 2k.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 4, i: 2
+path_list data: 2k.txt temp->ents->name: two.txt
+going into for loop
+temp->inum: 4, i: 3
+path_list data: 2k.txt temp->ents->name: 2k.txt
+BEGINNIGN
+MIDDLE
+END
+READ BUF èŒªi
+open(/2k.txt)
+getattr(/2k.txt)
+going into get_file_datafor path: /2k.txt
+current_path_list_data: 2k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 4, i: 0
+path_list data: 2k.txt temp->ents->name: /
+going into for loop
+temp->inum: 4, i: 1
+path_list data: 2k.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 4, i: 2
+path_list data: 2k.txt temp->ents->name: two.txt
+going into for loop
+temp->inum: 4, i: 3
+path_list data: 2k.txt temp->ents->name: 2k.txt
+root_node: 46, cur_node: 490
+read(/2k.txt, 4096 bytes, @0)
+going into get_file_datafor path: /2k.txt
+current_path_list_data: 2k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 4, i: 0
+path_list data: 2k.txt temp->ents->name: /
+going into for loop
+temp->inum: 4, i: 1
+path_list data: 2k.txt temp->ents->name: one.txt
+going into for loop
+temp->inum: 4, i: 2
+path_list data: 2k.txt temp->ents->name: two.txt
+going into for loop
+temp->inum: 4, i: 3
+path_list data: 2k.txt temp->ents->name: 2k.txt
+BEGINNIGN
+MIDDLE
+END
+READ BUF xŒªi
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+mkdir -p mnt || true
+./nufs -s -f mnt data.nufs
+Store file system data in: data.nufs
+made directory
+Ending init
+getattr(/.xdg-volume-info)
+going into get_file_datafor path: /.xdg-volume-info
+current_path_list_data: .xdg-volume-info
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: .xdg-volume-info temp->ents->name: /
+path_list = path_list->next
+/.xdg-volume-info does not exist
+access(/, 0004)
+going into get_file_datafor path: /
+getting dirent for root: /
+file does existgetattr(/autorun.inf)
+going into get_file_datafor path: /autorun.inf
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/autorun.inf)
+going into get_file_datafor path: /autorun.inf
+current_path_list_data: autorun.inf
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: autorun.inf temp->ents->name: /
+path_list = path_list->next
+/autorun.inf does not exist
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/one.txt)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+getattr(/two.txt)
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: two.txt temp->ents->name: /
+path_list = path_list->next
+/two.txt does not exist
+getattr(/one.txt)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+getattr(/one.txt)
+going into get_file_datafor path: /one.txt
+current_path_list_data: one.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: one.txt temp->ents->name: /
+path_list = path_list->next
+/one.txt does not exist
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/abc.txt)
+going into get_file_datafor path: /abc.txt
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/two.txt)
+going into get_file_datafor path: /two.txt
+current_path_list_data: two.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: two.txt temp->ents->name: /
+path_list = path_list->next
+/two.txt does not exist
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+readdir(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+dir_inum: 1
+getattr(/abc.txt)
+going into get_file_datafor path: /abc.txt
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/def.txt)
+going into get_file_datafor path: /def.txt
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/abc.txt)
+going into get_file_datafor path: /abc.txt
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/def.txt)
+going into get_file_datafor path: /def.txt
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/abc.txt)
+going into get_file_datafor path: /abc.txt
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/abc.txt)
+going into get_file_datafor path: /abc.txt
+current_path_list_data: abc.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: abc.txt temp->ents->name: /
+path_list = path_list->next
+/abc.txt does not exist
+getattr(/def.txt)
+going into get_file_datafor path: /def.txt
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/foo)
+going into get_file_datafor path: /foo
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+mkdir(/foo)
+getattr(/foo)
+going into get_file_datafor path: /foo
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+getattr(/foo)
+going into get_file_datafor path: /foo
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+getattr(/def.txt)
+going into get_file_datafor path: /def.txt
+current_path_list_data: def.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: def.txt temp->ents->name: /
+path_list = path_list->next
+/def.txt does not exist
+getattr(/foo)
+going into get_file_datafor path: /foo
+current_path_list_data: foo
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: foo temp->ents->name: /
+path_list = path_list->next
+/foo does not exist
+getattr(/40k.txt)
+going into get_file_datafor path: /40k.txt
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 1, i: 0
+path_list data: 40k.txt temp->ents->name: /
+path_list = path_list->next
+/40k.txt does not exist
+mknod(/40k.txt, 100664)
+making file: /40k.txt, 100664
+making file: /40k.txt with inode_bitmap index: 4
+new_ent->node_off: 638
+getattr(/40k.txt)
+going into get_file_datafor path: /40k.txt
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: 40k.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: 40k.txt temp->ents->name: 40k.txt
+root_node: 46, cur_node: 638
+getattr(/)
+going into get_file_datafor path: /
+getting dirent for root: /
+root_node: 46, cur_node: 46
+open(/40k.txt)
+write(/40k.txt, buf: =This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is , 4096 bytes, @0)
+rv = -1
+write(/40k.txt, buf: fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty character, 4096 bytes, @4096)
+rv = -1
+write(/40k.txt, buf: s long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This st, 4096 bytes, @8192)
+rv = -1
+write(/40k.txt, buf: ring is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty c, 4096 bytes, @12288)
+rv = -1
+write(/40k.txt, buf: haracters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.=, 4096 bytes, @16384)
+rv = -1
+write(/40k.txt, buf: =This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is , 4096 bytes, @20480)
+rv = -1
+write(/40k.txt, buf: fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty character, 4096 bytes, @24576)
+rv = -1
+write(/40k.txt, buf: s long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This st, 4096 bytes, @28672)
+rv = -1
+write(/40k.txt, buf: ring is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty c, 4096 bytes, @32768)
+rv = -1
+write(/40k.txt, buf: haracters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.=
+aracters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This strfusermount -u mnt || true
+ing is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty characters long.==This string is fourty c, 3137 bytes, @36864)
+rv = -1
+open(/40k.txt)
+getattr(/40k.txt)
+going into get_file_datafor path: /40k.txt
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: 40k.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: 40k.txt temp->ents->name: 40k.txt
+root_node: 46, cur_node: 638
+read(/40k.txt, 4096 bytes, @0)
+going into get_file_datafor path: /40k.txt
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: 40k.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: 40k.txt temp->ents->name: 40k.txt
+BEGINNIGN
+MIDDLE
+END
+READ BUF 
+open(/40k.txt)
+getattr(/40k.txt)
+going into get_file_datafor path: /40k.txt
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: 40k.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: 40k.txt temp->ents->name: 40k.txt
+root_node: 46, cur_node: 638
+read(/40k.txt, 4096 bytes, @4096)
+going into get_file_datafor path: /40k.txt
+current_path_list_data: 40k.txt
+going into while loop in get_file_data
+going into for loop
+temp->inum: 2, i: 0
+path_list data: 40k.txt temp->ents->name: /
+going into for loop
+temp->inum: 2, i: 1
+path_list data: 40k.txt temp->ents->name: 40k.txt
+BEGINNIGN
+MIDDLE
+END
+READ BUF x»ÿHŸ

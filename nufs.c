@@ -57,32 +57,40 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 {
     // loop through all of the entries of the of the given directory,
     // and filler them into the buf.
-    /*printf("readdir(%s)\n", path);
+    printf("readdir(%s)\n", path);
     struct stat st;
     get_stat(path, &st);
-    filler(buf, path, &st, 0);
 
-    struct stat root;
-    get_stat("/", &root);
-    filler(buf, "mnt", &root, 0);
+    filler(buf, ".", &st, 0);
+//    filler(buf, "one.txt", &st, 0);
+//    filler(buf, "two.txt", &st, 0);
+
+//    struct stat root;
+//    get_stat("/", &root);
+//    filler(buf, "mnt", &root, 0);
     directory* dir = get_root_directory();
 //    dir_ent* cur_ent = get_file_data(path);
 //    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(cur_ent->node_off))->blocks_off);
 //    directory* dir = (directory*)get_pointer(*(temp_pointer));
-    dir_ent* cur_ent = dir->ents + 1;
-    // add all of the entris in path to the buf
-/*    for (int i = 0; i < dir->inum; i++) {
-        cur_ent = cur_ent + 1;
-        struct stat temp;
+printf("dir_inum: %d\n", dir->inum);
+    if(dir->inum > 1) {
+        dir_ent* cur_ent = dir->ents + 1;
+        // add all of the entris in path to the buf
+        printf("starting dir_ent: %s\n", cur_ent->name);
+        for (int i = 0; i < dir->inum - 1; i++) {
+            cur_ent = cur_ent + i;
+            printf("cur_ent: %s\n", cur_ent->name);
+            struct stat temp;
 
-        char* full_path = malloc(256); // used to combine two char*
-        strcpy(full_path, path);
-        strcat(full_path, cur_ent->name);
+            char* full_path = malloc(256); // used to combine two char*
+            strcpy(full_path, path);
+            strcat(full_path, cur_ent->name);
 
-        get_stat(full_path, &temp);
-        filler(buf, full_path, &temp, 0);
-        free(full_path);
-    }*/
+            get_stat(full_path, &temp);
+            filler(buf, cur_ent->name, &temp, 0);
+        //    free(full_path);
+        }
+    }
 
     // TODO: change path to something that isnt root
     // filler is a callback that adds one item to the result
