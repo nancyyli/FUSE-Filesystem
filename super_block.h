@@ -16,7 +16,7 @@ typedef struct super_block {
     int data_bitmap_size;  // total number of chars used for the data bitmap.
     int data_bitmap_off;   // offset of the bitmap for data blocks in disk. (char*)
     int data_num;          // total number of data blocks in disk.
-    int data_blocks_off;     // offset of the data blocks in disk. (void*)
+    int data_blocks_off;   // offset of the data blocks in disk. (void*)
 
     // root node stuff
     int root_node_off;     // offset of root node in the inode block.
