@@ -152,6 +152,7 @@ storage_init(const char* path)
         root_dirent->name_off = dir->ents_off + sizeof(dir_ent);
         char* name = (char*)get_pointer(root_dirent->name_off);
         strcpy(name, "/");
+
         root_dirent->node_off = s_block->root_node_off;
 
         printf("made directory\n");
@@ -202,13 +203,16 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
 
     directory* root = (directory*)get_pointer(*(temp_pointer));
-    dir_ent* new_ent = (dir_ent*)(get_pointer(root->ents_off) + (root->inum * (48 + sizeof(dir_ent))));
+    dir_ent* new_ent = (dir_ent*)(get_pointer(root->ents_off + (root->inum * (48 + sizeof(dir_ent)))));
     new_ent->node_off = s_block->inodes_off + (index * INODE_SIZE);
     printf("new_ent->node_off: %d\n", new_ent->node_off);
-    new_ent->name_off = root->ents_off + ((root->inum + 1) * (48 + sizeof(dir_ent)));
+    new_ent->name_off = root->ents_off + ((root->inum + 2) * (48 + sizeof(dir_ent)));
     slist* path_name = s_split(path, '/');
     char* name = (char*)get_pointer(new_ent->name_off);
     strcpy(name, path_name->next->data);
+
+    printf("name: %s\n", name);
+            printf("name pointer: %s\n", (char*)get_pointer(new_ent->name_off));
     root->inum += 1;
 //    printf("root->inum: %d\n", root->inum);
 
@@ -241,13 +245,14 @@ get_file_data(const char* path) {
     char* current = path_list->data;
     printf("current_path_list_data: %s\n", path_list->data);
     directory* temp = root;
-    dir_ent* temp_ent = (dir_ent*)get_pointer(temp->ents_off);
+    dir_ent* temp_ent = (dir_ent*)get_pointer(temp->ents_off + sizeof(dir_ent) + 48);
     printf("going into while loop in get_file_data\n");
     while (path_list != NULL) {
-        for(int i = 0; i < temp->inum; i++) {
+        for(int i = 0; i < temp->inum - 1; i++) {
             printf("going into for loop\n");
             printf("temp->inum: %d, i: %d\n", temp->inum, i);
             printf("path_list data: %s temp->ents->name: %s\n", current, (char*)get_pointer(temp_ent->name_off));
+            printf("temp_ent->node_off %d\n", temp_ent->node_off);
             if(streq(current, (char*)get_pointer(temp_ent->name_off))) {
                 dir_ent* cur_ent = temp_ent;
 
