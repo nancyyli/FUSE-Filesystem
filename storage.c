@@ -322,6 +322,9 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         *(file_data + off) = *(buf + i);
     }
     printf("AFTER WRITTING\n");
+    
+    node->size = node->size - offset + size;
+    node->mtime = time(NULL);
 */
     return 0;
 }
