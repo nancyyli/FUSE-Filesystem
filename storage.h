@@ -13,7 +13,7 @@ int file_exists(const char* path);
 const char* get_data(const char* path);
 int make_file(const char *path, mode_t mode, dev_t rdev);
 int write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
-static dir_ent* get_file_data(const char* path);
+dir_ent* get_file_data(const char* path);
 void* get_pointer(int offset);
 
 #endif

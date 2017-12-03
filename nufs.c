@@ -57,11 +57,12 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 {
     // loop through all of the entries of the of the given directory,
     // and filler them into the buf.
-    printf("readdir(%s)\n", path);
+/*    printf("readdir(%s)\n", path);
     struct stat st;
     get_stat(path, &st);
-    filler(buf, ".", &st, 0);
+    filler(buf, path, &st, 0);
 
+    directory* get_root_directory();
     dir_ent* cur_ent = get_file_data(path);
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(cur_ent->node_off))->blocks_off);
     directory* dir = (directory*)get_pointer(*(temp_pointer));
@@ -78,7 +79,7 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
         get_stat(full_path, &temp);
         filler(buf, full_path, &temp, 0);
         free(full_path);
-    }
+    }*/
 
     // TODO: change path to something that isnt root
     // filler is a callback that adds one item to the result

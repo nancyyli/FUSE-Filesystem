@@ -22,7 +22,7 @@
 
 const int NUFS_SIZE  = 1024 * 1024;
 const int BLOCK_SIZE = 4096;
-const int INODE_SIZE =  sizeof(inode) + (sizeof(int*) * 15); // NOT TOO SURE ABOUT THIS
+const int INODE_SIZE =  sizeof(inode) + (sizeof(int) * 15); // NOT TOO SURE ABOUT THIS
 
 static super_block* s_block = 0;
 
@@ -158,10 +158,6 @@ storage_init(const char* path)
     //implement index of root node for s_block
 }
 
-// TODO: if file name already exists
-// the comment above can most likely be ignored.
-// fuse checks if a file exists with one of our methods.
-// so this is only called when we know the file does not exist.
 int
 make_file(const char *path, mode_t mode, dev_t rdev) {
     printf("making file: %s, %04o\n", path, mode);
@@ -182,7 +178,7 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     */
     //printf("s_block->inodes pointer: %p\n", (void*) s_block->inodes);
     //printf("node pointer: %p\n", (void*) node);
-    inode* node = (inode*)get_pointer(s_block->inodes_off) + (index * INODE_SIZE);
+    inode* node = (inode*)(get_pointer(s_block->inodes_off) + (index * INODE_SIZE));
     node->mode = mode;
     node->uid = getuid();
     node->size = 0;
@@ -199,21 +195,23 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     directory* root = (directory*)get_pointer(*(temp_pointer));
     dir_ent* new_ent = root->ents + root->inum;
     new_ent->node_off = s_block->inodes_off + (index * INODE_SIZE);
+    printf("new_ent->node_off: %d\n", new_ent->node_off);
     slist* path_name = s_split(path, '/');
     new_ent->name = path_name->next->data;
     root->inum += 1;
-    printf("root->inum: %d\n", root->inum);
+//    printf("root->inum: %d\n", root->inum);
 
     return 0;
 }
 
-static dir_ent*
+dir_ent*
 get_file_data(const char* path) {
     printf("going into get_file_data\n");
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
     directory* root = (directory*)get_pointer(*(temp_pointer));
     if (streq(path, "/")) {
-        printf("getting dirent for root\n");
+        printf("getting dirent for root: %s\n", root->ents->name);
+
         return root->ents;
     }
     slist* path_list = s_split(path,  '/');
@@ -276,7 +274,7 @@ get_file_data(const char* path) {
 
 int
 write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-    int off = offset % BLOCK_SIZE;
+/*    int off = offset % BLOCK_SIZE;
     int block_num = offset / BLOCK_SIZE;
 
     dir_ent* dat = get_file_data(path);
@@ -319,7 +317,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         // writting a byte at a time. might not work.
         *(file_data + off) = *(buf + i);
     }
-
+*/
     return 0;
 }
 
@@ -344,7 +342,10 @@ get_stat(const char* path, struct stat* st)
     }
 
     inode* cur_node = (inode*)get_pointer(dat->node_off);
+    printf("root_node: %d, cur_node: %d\n", s_block->root_node_off, dat->node_off);
 
+    printf("get_stat for: %d\n" , cur_node->mode);
+    printf("flag for: %d\n", cur_node->flags);
     memset(st, 0, sizeof(struct stat));
     st->st_uid  = getuid();
     st->st_gid = getgid();
