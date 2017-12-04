@@ -204,7 +204,7 @@ nufs_write(const char *path, const char *buf, size_t size, off_t offset, struct 
     printf("write(%s, buf: %s, %ld bytes, @%ld)\n", path, buf, size, offset);
     int rv = write_file(path, buf, size, offset, fi);
     if(!rv) {
-        printf("rv = -1\n");
+        // printf("rv = -1\n");
         return (int)size;
     }
     else {

@@ -291,11 +291,10 @@ get_file_data(const char* path) {
 
 int
 write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-
     int off = offset % BLOCK_SIZE;
     int block_num = offset / BLOCK_SIZE;
 
-    printf("IN WRITE\n");
+    printf("IN WRITE: %s\n", buf);
     dir_ent* dat = get_file_data(path);
     if (!dat) {
         // TODO: print error? make new file? what should happen in this case?
@@ -324,8 +323,9 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
             node->num_blocks += 1;
         }
     }
-    printf("AFTER ADDING BLOCKS: num_blocks: %d\n", node->num_blocks);
-    printf("AFTER ADDING BLOCKS: node->blocks_off: %d\n", node->blocks_off);
+    temp_pointer = (int*)get_pointer(node->blocks_off);
+    int* roottemp = (int*)get_pointer(s_block->data_blocks_off);
+    printf("AFTER ADDING BLOCKS: num_blocks: %d, block offset: %d, root block offset: %d\n", node->num_blocks, *(temp_pointer), *(roottemp));
 
     // get the data from the block we are writting to
     temp_pointer = ((int*)get_pointer(node->blocks_off)) + block_num; // blocks_num = 0 rn
@@ -334,8 +334,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
 
     // write the data
     for (int i = 0; i < size; i++) {
-        printf("WRITTING i: %d, total: %d\n", i, size);
-
+        printf("WRITTING i: %d, total: %d, block offset: %d\n", i, size, *(temp_pointer));
         // checks if we have reached the point to switch to a new block
 /*        if (((offset + i) % BLOCK_SIZE) == 0) {
             printf("SWITCHING TO NEW BLOCK with mod: %d\n", (offset + i) % BLOCK_SIZE);
@@ -349,7 +348,8 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         *(file_data + off) = *(buf + i);
         off += 1;
     }
-    printf("AFTER WRITTING\n");
+    temp_pointer = (int*)get_pointer(node->blocks_off);
+    printf("AFTER WRITTING: %s, block off: %d\n", (char*)get_pointer(*(temp_pointer)), *(temp_pointer));
 
     node->size = node->size - offset + size;
     node->mtime = time(NULL);
@@ -434,14 +434,13 @@ get_data(const char* path)
     for(int i = 0; i < num_blocks; i++) {
         temp_pointer = ((int*)get_pointer(node->blocks_off)) + i;
         char* temp = (char*)get_pointer(*(temp_pointer));
-        printf("DATA IN NODE %s\n", temp);
+        printf("DATA IN NODE BLOCK %s\n", temp);
         for(int j = 0; j < BLOCK_SIZE; j++) {
-            printf("IN LOOP: J: %d\n", j);
+            //printf("IN LOOP: J: %d\n", j);
             *(buf + j + (i * BLOCK_SIZE)) = *(temp + j);
         }
     }
     printf("END\n");
-
     printf("READ BUF %s\n", buf);
     return buf;
 }
