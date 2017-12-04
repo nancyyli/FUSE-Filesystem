@@ -290,10 +290,10 @@ get_file_data(const char* path) {
 
 int
 write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-/*    int off = offset % BLOCK_SIZE;
+    int off = offset % BLOCK_SIZE;
     int block_num = offset / BLOCK_SIZE;
 
-    printf("IN WRITE\n");
+    printf("IN WRITE: %s\n", buf);
     dir_ent* dat = get_file_data(path);
     if (!dat) {
         // TODO: print error? make new file? what should happen in this case?
@@ -305,7 +305,7 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
 
     // add mem blocks to the node if necessary
     if((offset + size)/BLOCK_SIZE >= node->num_blocks) {
-        for(int i = 0; i < 1/*((offset + size)/BLOCK_SIZE) - node->num_blocks*//*; i++) {
+        for(int i = 0; i < 1/*((offset + size)/BLOCK_SIZE) - node->num_blocks*/; i++) {
             // get index from bitmap
             int index = get_bit_index((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size);
             set_bit((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size, 1, index);
@@ -337,11 +337,11 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         // writting a byte at a time. might not work.
         *(file_data + off) = *(buf + i);
     }
-    printf("AFTER WRITTING\n");
+    printf("AFTER WRITTING: %s\n", file_data);
 
     node->size = node->size - offset + size;
     node->mtime = time(NULL);
-*/
+
     return 0;
 }
 
