@@ -16,5 +16,6 @@ int write_file(const char *path, const char *buf, size_t size, off_t offset, str
 dir_ent* get_file_data(const char* path);
 void* get_pointer(int offset);
 directory* get_root_directory();
+int rename_file(const char *from_path, const char *to_path);
 
 #endif
