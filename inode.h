@@ -19,7 +19,7 @@ typedef struct inode {
 	nlink_t links_count; // number of hard links pointing to this file
 	int num_blocks;      // number of blocks allocated to this file
 	int flags; 	     	 // file or directory? 1 or 0
-	int blocks_off;      // ofsset for the data block offsets.
+	int blocks_off;      // offset for the data block offsets.
 } inode;
 
 #endif

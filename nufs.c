@@ -131,6 +131,7 @@ int
 nufs_unlink(const char *path)
 {
     printf("unlink(%s)\n", path);
+    int rv = unlink_file(path);
     return -1;
 }
 
@@ -148,7 +149,12 @@ nufs_rename(const char *from, const char *to)
 {
     printf("rename(%s => %s)\n", from, to);
     int rv = rename_file(from, to);
-    return 0;
+    if (rv == -1) {
+        return -ENOENT;
+    }
+    else {
+        return 0;
+    }
 }
 
 int

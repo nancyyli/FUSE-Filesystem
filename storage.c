@@ -196,9 +196,10 @@ make_file(const char *path, mode_t mode, dev_t rdev) {
     node->ctime = time(NULL);
     node->mtime = time(NULL);
     node->gid = getgid();
-    node->links_count = 0;
+    node->links_count = 1;
     node->num_blocks = 0;
     node->flags = 1; // TODO
+    node->blocks_off = sizeof(inode) + (s_block->inodes_off + (index * INODE_SIZE));
 
     int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
 
@@ -290,7 +291,8 @@ get_file_data(const char* path) {
 
 int
 write_file(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
-/*    int off = offset % BLOCK_SIZE;
+
+    int off = offset % BLOCK_SIZE;
     int block_num = offset / BLOCK_SIZE;
 
     printf("IN WRITE\n");
@@ -299,17 +301,22 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         // TODO: print error? make new file? what should happen in this case?
         return -1;
     }
+
     printf("AFTER GETTING THE DIRENT\n");
+
+
     inode* node = (inode*)get_pointer(dat->node_off);
+
+
     int* temp_pointer = 0;
 
     // add mem blocks to the node if necessary
     if((offset + size)/BLOCK_SIZE >= node->num_blocks) {
-        for(int i = 0; i < 1/*((offset + size)/BLOCK_SIZE) - node->num_blocks*//*; i++) {
+        for(int i = 0; i < 1/*((offset + size)/BLOCK_SIZE) - node->num_blocks*/; i++) {
             // get index from bitmap
             int index = get_bit_index((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size);
             set_bit((char*)get_pointer(s_block->data_bitmap_off), s_block->data_bitmap_size, 1, index);
-
+            printf("index from get_bit_index: %d\n", index);
             // set the block offeset in the node
             temp_pointer = ((int*)get_pointer(node->blocks_off)) + node->num_blocks;
             printf("TEMP POINTER: %p\n", temp_pointer);
@@ -318,30 +325,35 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
         }
     }
     printf("AFTER ADDING BLOCKS: num_blocks: %d\n", node->num_blocks);
+    printf("AFTER ADDING BLOCKS: node->blocks_off: %d\n", node->blocks_off);
 
     // get the data from the block we are writting to
-    temp_pointer = ((int*)get_pointer(node->blocks_off)) + block_num;
-    char* file_data = get_pointer(*(temp_pointer));
+    temp_pointer = ((int*)get_pointer(node->blocks_off)) + block_num; // blocks_num = 0 rn
+    char* file_data =  (char*)get_pointer(*(temp_pointer));
+    printf("AFTER ADDING BLOCKS: file_data %s\n", file_data);
 
     // write the data
     for (int i = 0; i < size; i++) {
         printf("WRITTING i: %d, total: %d\n", i, size);
+
         // checks if we have reached the point to switch to a new block
-        if ((offset + i) % BLOCK_SIZE == 0) {
+/*        if (((offset + i) % BLOCK_SIZE) == 0) {
+            printf("SWITCHING TO NEW BLOCK with mod: %d\n", (offset + i) % BLOCK_SIZE);
             block_num += 1;
             off = 0;
             temp_pointer = ((int*)get_pointer(node->blocks_off)) + block_num;
-            file_data = get_pointer(*(temp_pointer));
-        }
+            file_data = (char*)get_pointer(*(temp_pointer));
+        }*/
 
         // writting a byte at a time. might not work.
         *(file_data + off) = *(buf + i);
+        off += 1;
     }
     printf("AFTER WRITTING\n");
 
     node->size = node->size - offset + size;
     node->mtime = time(NULL);
-*/
+
     return 0;
 }
 
@@ -444,4 +456,25 @@ rename_file(const char *from_path, const char *to_path) {
     strcpy(from_name, path_name->next->data);
 
     return 0;
+}
+
+int
+get_dirent_index(const char *path) {
+    directory* root = get_root_directory();
+
+    for (int i = 0; i < root->inum; i++) {
+        dir_ent* cur_ent = (dir_ent*)get_pointer(root->ents_off + (i * (sizeof(dir_ent) + 48)));
+        const char* cur_name = (char*)get_pointer(cur_ent->name_off);
+        if (streq(cur_name, path)) {
+            return i;
+        }
+    }
+    return 0;
+}
+int
+unlink_file(const char *path) {
+    dir_ent* path_ent = get_file_data(path);
+    int index = get_dirent_index(path);
+    set_bit((char*)get_pointer(s_block->inode_bitmap_off), s_block->inode_bitmap_size, 0, index);
+    // check for links later
 }
