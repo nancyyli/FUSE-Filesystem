@@ -10,7 +10,7 @@ nufs: $(SRCS)
 	gcc $(CFLAGS) -o nufs $(SRCS) $(LDLIBS)
 
 clean: unmount
-	rm -f nufs *.o test.log  data.nufs
+	rm -f nufs *.o test.log data.nufs
 	rmdir mnt || true
 
 mount: nufs

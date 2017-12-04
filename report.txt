@@ -1,0 +1,33 @@
+
+Advantages and Drawbacks:
+    Advantages: We do not store pointers in our filesystem structure. All of
+    our structures are stored with offsets. This allows us to mount and unmount
+    the disk image without losing any of the files and data we created. We
+    followed Nats advice and used the basic ext filesystem structure for our
+    filesystem.
+
+    Drawbacks: Our filesystem currently is still very basic. It only has one
+    directory, the root directory, where files can be created. There is
+    definitely still a couple of missing functionality that we did not have the
+    time to implement. However, all of our implemented functionalities work
+    perfectly. 
+
+    If we had more time, we would improve our filesystem by implementing the
+    missing functionalities.
+
+    Features implemented:
+        * Create files
+        * List the files in the filesystem root directory(ls mnt)
+        * Read/Write to small files(under 4k)
+        * Rename files
+        * Support metadata for files and directories (metadata is saved in each
+        inode)
+
+    Missing Functionality:
+        * Deleting files (code exists but does not work properly)
+        * Does not create nested directories
+        * Create hard/soft links
+        * Read/Write to files larger than 4k
+        * Remove directories
+
+    We did not implement any additional functionality that was not required.
