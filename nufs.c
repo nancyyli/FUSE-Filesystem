@@ -124,7 +124,13 @@ int
 nufs_mkdir(const char *path, mode_t mode)
 {
     printf("mkdir(%s)\n", path);
-    return -1;
+    int rv = make_dir(path, mode);
+    if (rv == -1) {
+        return -ENOENT;
+    }
+    else {
+        return 0;
+    }
 }
 
 int

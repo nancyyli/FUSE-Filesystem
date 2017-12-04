@@ -477,3 +477,59 @@ unlink_file(const char *path) {
     set_bit((char*)get_pointer(s_block->inode_bitmap_off), s_block->inode_bitmap_size, 0, index);
     // check for links later
 }
+
+int
+make_dir(const char *path, mode_t mode) {
+    printf("making file: %s, %04o\n", path, mode);
+    //print_char_bin(*(s_block->inode_bitmap));
+    int index = get_bit_index((char*)get_pointer(s_block->inode_bitmap_off), s_block->inode_bitmap_size);
+
+    printf("making file: %s with inode_bitmap index: %d\n", path, index);
+    set_bit((char*)get_pointer(s_block->inode_bitmap_off), s_block->inode_bitmap_size, 1, index);
+    /*
+    int num_node = 0;
+    inode* node = s_block->inodes;
+    while(num_node < index) {
+        printf("num_node: %d, index: %d\n", num_node, index);
+        node->next = (void*) node + sizeof(inode);
+        node = node->next;
+        num_node += 1;
+    }
+    */
+    //printf("s_block->inodes pointer: %p\n", (void*) s_block->inodes);
+    //printf("node pointer: %p\n", (void*) node);
+    inode* node = (inode*)(get_pointer(s_block->inodes_off) + (index * INODE_SIZE));
+    node->mode = mode;
+    node->uid = getuid();
+    node->size = 0;
+    node->atime = time(NULL);
+    node->ctime = time(NULL);
+    node->mtime = time(NULL);
+    node->gid = getgid();
+    node->links_count = 1;
+    node->num_blocks = 0;
+    node->flags = 0; // TODO
+    node->blocks_off = sizeof(inode) + (s_block->inodes_off + (index * INODE_SIZE));
+
+    int* temp_pointer = (int*)get_pointer(((inode*)get_pointer(s_block->root_node_off))->blocks_off);
+
+    directory* root = (directory*)get_pointer(*(temp_pointer));
+    dir_ent* new_ent = (dir_ent*)(get_pointer(root->ents_off + ((root->inum + 1) * (48 + sizeof(dir_ent)))));
+    directory* new_dir = (directory*)get_pointer(*(temp_pointer) + (root->inum * (48 + sizeof(dir_ent))));
+    new_dir->node_off = s_block->inodes_off + (index * INODE_SIZE);
+    new_dir->inum = 1;
+    new_dir->ents_off = s_block->data_blocks_off + sizeof(directory) + ((root->inum * (48 + sizeof(dir_ent))));
+    new_ent->node_off = s_block->inodes_off + ((index + 1) * INODE_SIZE);
+    printf("new_ent->node_off: %d\n", new_ent->node_off);
+    new_ent->name_off = root->ents_off + ((root->inum + 2) * (48 + sizeof(dir_ent)));
+    slist* path_name = s_split(path, '/');
+    char* name = (char*)get_pointer(new_ent->name_off);
+    strcpy(name, path_name->next->data);
+
+    printf("name: %s\n", name);
+            printf("name pointer: %s\n", (char*)get_pointer(new_ent->name_off));
+    root->inum += 1;
+//    printf("root->inum: %d\n", root->inum);
+
+    return 0;
+}

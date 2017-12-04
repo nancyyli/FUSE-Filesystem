@@ -18,5 +18,6 @@ void* get_pointer(int offset);
 directory* get_root_directory();
 int rename_file(const char *from_path, const char *to_path);
 int unlink_file(const char *path);
+int make_dir(const char *path, mode_t mode);
 
 #endif
