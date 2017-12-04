@@ -433,3 +433,15 @@ get_data(const char* path)
     printf("READ BUF %s\n", buf);
     return buf;
 }
+
+int
+rename_file(const char *from_path, const char *to_path) {
+    dir_ent* from_data = get_file_data(from_path);
+
+    char* from_name = (char*)get_pointer(from_data->name_off);
+
+    slist* path_name = s_split(to_path, '/');
+    strcpy(from_name, path_name->next->data);
+
+    return 0;
+}

@@ -147,7 +147,8 @@ int
 nufs_rename(const char *from, const char *to)
 {
     printf("rename(%s => %s)\n", from, to);
-    return -1;
+    int rv = rename_file(from, to);
+    return 0;
 }
 
 int
