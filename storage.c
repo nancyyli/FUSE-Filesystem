@@ -129,7 +129,7 @@ storage_init(const char* path)
 
         inode* r_node = (inode*)get_pointer(s_block->root_node_off);
         //printf("r_node: %p\n", (void*) r_node);
-        r_node->mode = 0755;
+        r_node->mode = 040755;
         r_node->uid = getuid();
         r_node->size = BLOCK_SIZE;
         r_node->atime = time(NULL);
@@ -360,8 +360,9 @@ write_file(const char *path, const char *buf, size_t size, off_t offset, struct 
 int
 file_exists(const char* path) {
     dir_ent* dat = get_file_data(path);
-    printf("file does exist");
+    printf("file does exist\n");
     if (!dat) {
+        printf("file doesnt exist\n");
       return -1;
     }
     else {

@@ -25,7 +25,8 @@ nufs_access(const char *path, int mask)
 {
     printf("access(%s, %04o)\n", path, mask);
     int result = file_exists(path);
-    if (result = -1) {
+    if (result == -1) {
+        printf("result for access: %d\n", result);
       return -ENOENT;
     }
     else {
