@@ -75,13 +75,13 @@ nufs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 //    directory* dir = (directory*)get_pointer(*(temp_pointer));
 printf("dir_inum: %d\n", dir->inum);
     if(dir->inum > 1) {
-        dir_ent* cur_ent = (dir_ent*)(get_pointer(dir->ents_off + (48 + sizeof(dir_ent))));
+        dir_ent* cur_ent = (dir_ent*)(get_pointer(dir->ents_off + (64 + sizeof(dir_ent))));
         //dir_ent* cur_ent = (dir_ent*)get_pointer(dir->ents_off;
                printf("nodes_off: %d\n", dir->node_off);
         // add all of the entris in path to the buf
         printf("starting dir_ent: %s\n", (char*)get_pointer(cur_ent->name_off));
         for (int i = 0; i < dir->inum - 1; i++) {
-            cur_ent = (dir_ent*)(get_pointer(dir->ents_off + ((i + 1) * (48 + sizeof(dir_ent)))));
+            cur_ent = (dir_ent*)(get_pointer(dir->ents_off + ((i + 1) * (64 + sizeof(dir_ent)))));
             //cur_ent = cur_ent + i;
             printf("cur_ent: %s\n", (char*)get_pointer(cur_ent->name_off));
             struct stat temp;
@@ -125,13 +125,14 @@ int
 nufs_mkdir(const char *path, mode_t mode)
 {
     printf("mkdir(%s)\n", path);
-    int rv = make_dir(path, mode);
+    /*int rv = make_dir(path, mode);
     if (rv == -1) {
         return -ENOENT;
     }
     else {
         return 0;
-    }
+    }*/
+    return 0;
 }
 
 int
@@ -139,7 +140,12 @@ nufs_unlink(const char *path)
 {
     printf("unlink(%s)\n", path);
     int rv = unlink_file(path);
-    return -1;
+    if (rv == -1) {
+        return -ENOENT;
+    }
+    else {
+        return 0;
+    }
 }
 
 int
@@ -168,7 +174,12 @@ int
 nufs_chmod(const char *path, mode_t mode)
 {
     printf("chmod(%s, %04o)\n", path, mode);
-    return -1;
+
+    dir_ent* ent = get_file_data(path);
+    inode* node = (inode*)get_pointer(ent->node_off);
+    node->mode = mode;
+
+    return 0;
 }
 
 int
