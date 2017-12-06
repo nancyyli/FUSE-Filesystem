@@ -22,12 +22,12 @@ Advantages and Drawbacks:
         * Rename files
         * Support metadata for files and directories (metadata is saved in each
         inode)
+        * Deleting files
 
     Missing Functionality:
-        * Deleting files (code exists but does not work properly)
         * Does not create nested directories (code exists but does not work properly)
         * Create hard/soft links
-        * Read/Write to files larger than 4k
+        * Read/Write to files larger than 40k
         * Remove directories
 
     We did not implement any additional functionality that was not required.

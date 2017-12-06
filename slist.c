@@ -1,3 +1,5 @@
+// This is from Nat Tucks hints directory starter code
+
 #include <string.h>
 #include <stdlib.h>
 #include <alloca.h>
@@ -54,4 +56,3 @@ s_split(const char* text, char delim)
 
     return s_cons(part, rest);
 }
-

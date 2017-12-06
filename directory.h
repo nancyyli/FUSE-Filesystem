@@ -3,8 +3,7 @@
 
 typedef struct dir_ent {
     int node_off; // node offset of directory entry
-    int name_off; // name of directory entry. 48 bytes total.
-    // const char* name;
+    int name_off; // name of directory entry. 64 bytes total.
 } dir_ent;
 
 typedef struct directory {

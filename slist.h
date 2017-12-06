@@ -1,3 +1,5 @@
+// This is from Nat Tucks hints directory starter code
+
 #ifndef SLIST_H
 #define SLIST_H
 
@@ -12,4 +14,3 @@ void   s_free(slist* xs);
 slist* s_split(const char* text, char delim);
 
 #endif
-

@@ -18,7 +18,7 @@ typedef struct inode {
 	dev_t dev;           // ID of device containing file
 	nlink_t links_count; // number of hard links pointing to this file
 	int num_blocks;      // number of blocks allocated to this file
-	int flags; 	     	 // file or directory? 1 or 0
+	int flags; 	     	 // file = 1 directory = 0
 	int blocks_off;      // offset for the data block offsets.
 } inode;
 
